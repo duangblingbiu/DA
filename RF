@@ -1,0 +1,42 @@
+#加载包
+library(randomForest)
+library(pROC)
+library(caret)
+library(tidyverse)
+library(skimr)
+library(DataExplorer)
+
+#加载数据
+data <- read.csv("C:\\Users\\ASUS\\Desktop\\小论文\\数据\\滑坡和非滑坡1.csv")
+
+#将数据集划分为两部分 一部分训练集 另一部分测试集 7：3
+trainindex <- createDataPartition(y = data$Z, p = 0.7, list = FALSE)
+traindata <- data[trainindex, ]
+testdata <- data[-trainindex, ]
+
+#训练模型
+set.seed(6666)
+RF<- randomForest(as.factor(Z)~.,data=traindata,importance=T,ntree=300,mtry=3)
+
+#模型概要
+RF
+
+#关系图(随着树的增加，错误没有显著的变化)
+plot(RF,main = "randomForest")
+
+#变量的重要性（
+importance(RF)
+varImpPlot(RF,main = "Variable Importance Plot")
+
+#训练集预测结果
+RFtrain <- predict(RF,newdata = traindata,type = "class")
+RFtrain
+
+#测试集预测结果
+RFtest <- predict(RF,newdata = testdata,type = "class")
+RFtest
+
+
+#混淆矩阵
+RFcf <- caret::confusionMatrix(as.factor(RFtest),as.factor(testdata$Z))
+RFcf
