@@ -24,7 +24,7 @@ RF
 #关系图(随着树的增加，错误没有显著的变化)
 plot(RF,main = "randomForest")
 
-#变量的重要性（
+#变量的重要性
 importance(RF)
 varImpPlot(RF,main = "Variable Importance Plot")
 
@@ -39,7 +39,3 @@ RFtest
 #混淆矩阵
 RFcf <- caret::confusionMatrix(as.factor(RFtest),as.factor(testdata$Z))
 RFcf
-
-#训练和测试完毕后，如果精度符合标准，则将研究区所有数据导入模型进行预测分类
-RRRRRF <- predict(RF,newdata = research,type = "prob")
-RRRRRF
