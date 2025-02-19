@@ -36,7 +36,10 @@ RFtrain
 RFtest <- predict(RF,newdata = testdata,type = "class")
 RFtest
 
-
 #混淆矩阵
 RFcf <- caret::confusionMatrix(as.factor(RFtest),as.factor(testdata$Z))
 RFcf
+
+#训练和测试完毕后，如果精度符合标准，则将研究区所有数据导入模型进行预测分类
+RRRRRF <- predict(RF,newdata = research,type = "prob")
+RRRRRF
