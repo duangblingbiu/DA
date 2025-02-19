@@ -7,7 +7,7 @@ library(skimr)
 library(DataExplorer)
 
 #加载数据
-data <- read.csv("C:\\Users\\ASUS\\Desktop\\小论文\\数据\\滑坡和非滑坡1.csv")
+data <- read.csv("C:\\Users\\ASUS\\Desktop\\data.csv")
 
 #将数据集划分为两部分 一部分训练集 另一部分测试集 7：3
 trainindex <- createDataPartition(y = data$Z, p = 0.7, list = FALSE)
